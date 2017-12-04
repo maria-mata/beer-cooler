@@ -27,7 +27,7 @@
 <script>
 export default {
   name: 'Beer',
-  props: ['beer', 'addLike', 'removeLike'],
+  props: ['beer', 'updateLikes', 'removeLike'],
   computed: {
     likesCount() {
       return this.beer.likes
@@ -36,13 +36,11 @@ export default {
   methods: {
     likeBeer(id, likes) {
       this.beer.likes = likes + 1
-      this.addLike(id, this.beer.likes)
+      this.updateLikes(id, this.beer.likes)
     },
     unlikeBeer(id, likes) {
-      likes - 1 < 0 ? this.beer.likes = 0 :
-      this.beer.likes = likes - 1
-
-      this.removeLike(id, this.beer.likes)
+      likes - 1 < 0 ? this.beer.likes = 0 : this.beer.likes = likes - 1
+      this.updateLikes(id, this.beer.likes)
     }
   }
 }

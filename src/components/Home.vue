@@ -3,12 +3,12 @@
     <div class="container">
       <div class="content">
         <!-- Add a Beer Form -->
-        <add :beers="beers" :addBeer="addBeer"/>
+        <add :addBeer="addBeer"/>
       </div>
       <!-- List of Beers Here  -->
       <div class="columns is-multiline">
         <beer v-for="beer in beers" :beer="beer" key="beer.id"
-        :addLike="addLike" :removeLike="removeLike"/>
+        :updateLikes="updateLikes"/>
       </div>
     </div>
   </section>
@@ -56,20 +56,7 @@ export default {
         location.reload()
       })
     },
-    addLike(id, likes) {
-      console.log(id);
-      const settings = {
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-          likes: JSON.stringify(likes)
-        })
-      }
-      fetch(`${url}/${id}`, settings)
-    },
-    removeLike(id, likes) {
+    updateLikes(id, likes) {
       const settings = {
         method: 'PUT',
         headers: {

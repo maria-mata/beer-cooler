@@ -16,7 +16,7 @@
 <script>
 export default {
   name: 'Add',
-  props: ['beers', 'addBeer'],
+  props: ['addBeer'],
   data() {
     return {
       beer: ''
