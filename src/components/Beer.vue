@@ -5,15 +5,15 @@
         <div class="media-content">
           <div class="content">
             <p>
-              {{ beer.name }} ({{ beer.likes }} likes)
+              {{ beer.name }} ({{ this.likesCount }} likes)
             </p>
           </div>
           <nav class="level is-mobile">
             <div class="level-left">
-              <a class="level-item" @click.prevent="addLike(beer.id, beer.likes)">
+              <a class="level-item" @click.prevent="likeBeer(beer.id, beer.likes)">
                 <span class="icon"><i class="fa fa-thumbs-up"></i></span>
               </a>
-              <a class="level-item" @click.prevent="removeLike(beer.id, beer.likes)">
+              <a class="level-item" @click.prevent="unlikeBeer(beer.id, beer.likes)">
                 <span class="icon"><i class="fa fa-thumbs-down"></i></span>
               </a>
             </div>
@@ -27,6 +27,23 @@
 <script>
 export default {
   name: 'Beer',
-  props: ['beer', 'addLike', 'removeLike']
+  props: ['beer', 'addLike', 'removeLike'],
+  computed: {
+    likesCount() {
+      return this.beer.likes
+    }
+  },
+  methods: {
+    likeBeer(id, likes) {
+      this.beer.likes = likes + 1
+      this.addLike(id, this.beer.likes)
+    },
+    unlikeBeer(id, likes) {
+      likes - 1 < 0 ? this.beer.likes = 0 :
+      this.beer.likes = likes - 1
+
+      this.removeLike(id, this.beer.likes)
+    }
+  }
 }
 </script>

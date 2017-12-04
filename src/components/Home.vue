@@ -57,13 +57,22 @@ export default {
           'content-type': 'application/json'
         },
         body: JSON.stringify({
-          likes: JSON.stringify(likes + 1)
+          likes: JSON.stringify(likes)
         })
       }
       fetch(`${url}/${id}`, settings)
     },
-    removeLike(id) {
-      console.log(id);
+    removeLike(id, likes) {
+      const settings = {
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          likes: JSON.stringify(likes)
+        })
+      }
+      fetch(`${url}/${id}`, settings)
     },
     addBeer(beer) {
       console.log(beer);
