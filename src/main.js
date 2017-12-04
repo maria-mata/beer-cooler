@@ -3,6 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Bulma from 'bulma/css/bulma.css'
+
+Vue.use(Bulma)
 
 Vue.config.productionTip = false
 
