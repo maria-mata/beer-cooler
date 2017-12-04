@@ -27,7 +27,7 @@
 <script>
 export default {
   name: 'Beer',
-  props: ['beer', 'updateLikes', 'removeLike'],
+  props: ['beer', 'updateLikes'],
   computed: {
     likesCount() {
       return this.beer.likes
