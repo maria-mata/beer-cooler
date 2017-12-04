@@ -1,28 +1,17 @@
 <template>
-  <div>
-    <nav class="navbar is-dark">
-      <div class="container">
-        <div class="navbar-brand">
-          <p class="navbar-item heading is-size-4">Beer Cooler</p>
-        </div>
-        <div class="navbar-menu">
-          <div class="navbar-end">
-            <!-- Add a Beer Form -->
-            <add :beers="beers" :addBeer="addBeer"/>
-          </div>
-        </div>
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <!-- Add a Beer Form -->
+        <add :beers="beers" :addBeer="addBeer"/>
       </div>
-    </nav>
-    <section class="section">
-      <div class="container">
-        <!-- List of Beers Here  -->
-        <div class="columns is-multiline">
-          <beer v-for="beer in beers" :beer="beer" key="beer.id"
-          :addLike="addLike" :removeLike="removeLike"/>
-        </div>
+      <!-- List of Beers Here  -->
+      <div class="columns is-multiline">
+        <beer v-for="beer in beers" :beer="beer" key="beer.id"
+        :addLike="addLike" :removeLike="removeLike"/>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -30,14 +19,14 @@ const proxy = 'https://cors-anywhere.herokuapp.com/'
 const api = 'http://beer.fluentcloud.com/v1/beer'
 const url = proxy + api
 
-import Beer from './Beer'
 import Add from './Add'
+import Beer from './Beer'
 
 export default {
   name: 'Home',
   components: {
-    Beer,
-    Add
+    Add,
+    Beer
   },
   data() {
     return {
@@ -50,7 +39,25 @@ export default {
     this.beers = response
   },
   methods: {
+    addBeer(beer) {
+      const settings = {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: beer,
+          likes: '0'
+        })
+      }
+      fetch(url, settings)
+      .then(response => {
+        response.json()
+        location.reload()
+      })
+    },
     addLike(id, likes) {
+      console.log(id);
       const settings = {
         method: 'PUT',
         headers: {
@@ -73,9 +80,6 @@ export default {
         })
       }
       fetch(`${url}/${id}`, settings)
-    },
-    addBeer(beer) {
-      console.log(beer);
     }
   }
 }

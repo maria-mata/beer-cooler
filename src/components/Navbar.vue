@@ -1,26 +1,15 @@
 <template>
-  <nav class="navbar is-primary">
-    <div class="navbar-brand">
-      <h1 class="title is-white">Beer Cooler</h1>
-    </div>
-    <div class="navbar-menu">
-      <div class="navbar-end">
-        <add/>
+  <nav class="navbar is-dark is-fixed-top">
+    <div class="container">
+      <div class="navbar-brand ">
+        <p class="navbar-item heading is-size-4 ">Beer Cooler</p>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-import Add from './Add'
-
 export default {
-  name: 'Navbar',
-  components: {
-    Add
-  }
+  name: 'Navbar'
 }
 </script>
-
-<style lang="css">
-</style>
